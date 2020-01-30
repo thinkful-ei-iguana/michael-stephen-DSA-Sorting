@@ -84,6 +84,7 @@ function display(list) {
 }
 
 // display(makeList());
+const list2 = makeList();
 
 function mergeSortLL(list) {
   if(size(list) <= 1) {
@@ -104,29 +105,45 @@ function mergeSortLL(list) {
 
   right = mergeSortLL(right);
   left = mergeSortLL(left);
-  return mergeLL(left, right, list);
+  return mergeLL(left, right);
 }
 
 
-function mergeLL(left, right, list) {
+function mergeLL(left, right) {
+  let newLL = new LL();
   // compare value of left to value of right put lowest value into list.LL
-  while(left.head !== null && right.head !== null) {
-    if(left.head.value < right.head.value) {
-      list.next = left.next;
-    } else {
-      // let something = right.remove(right.head.value);
-      list.next = right.next;
+  let leftNode = left.head;
+  let rightNode = right.head;
+  while(leftNode !== null || rightNode !== null) {
+    if(leftNode === null) {
+      newLL.insertLast(rightNode.value);
+      rightNode = rightNode.next;
     }
+    else if(rightNode === null) {
+      newLL.insertLast(leftNode.value);
+      leftNode = leftNode.next;
+    }
+    else if(leftNode.value < rightNode.value) {
+      newLL.insertLast(leftNode.value);
+      leftNode = leftNode.next;
+    } else {
+      newLL.insertLast(rightNode.value);
+      rightNode = rightNode.next;
+    }
+    
   }
-  return list;
+  return newLL;
 }
-
+// console.log(mergeLL(list2, list2));
+// display(mergeLL(list2, list2));
 console.log(mergeSortLL(makeList()));
+display(mergeSortLL(list2));
 
 //6 - Bucket Sort
 
 /* O(n) algorithm to sort array of integers.  We know highest and lowest values.  no .splice(), shift(), or unshift(). */
 
+<<<<<<< HEAD
 function bucketSort(array) {
   const n = array.length / array[0];
   let buckets = [];
@@ -158,6 +175,7 @@ const array = [0.9, 0.8, 0.5, 0.3, 0.2, 0.7, 0.1, 0.4, 0.6];
 
 console.log(bucketSort(array));
 
+sortNums([1,5,7,6,4,10,15,11,8], 15, 1);
 //7 - Sort in place
 
 /* Write a function that will shuffle an array into a random order in place (without creating a new array) */
