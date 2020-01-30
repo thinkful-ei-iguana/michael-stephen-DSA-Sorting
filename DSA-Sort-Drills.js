@@ -1,4 +1,5 @@
 const sort = require('./sort');
+const LL = require('./Linked-List/linked-lists');
 
 /* 1 - Understanding merge sort
 
@@ -44,5 +45,49 @@ console.log('Quick: ', sort.quickSort(testData));
 console.log('Merge: ', sort.mergeSort(testData));
 
 //5 - Sorting a linked list using merge sort
+function makeList() {
+  let testList = new LL();
+  testList.insertLast(1);
 
+  return testList;
+}
+
+console.log(makeList());
+
+function mergeSortLL(list) {
+
+}
+
+function mergeLL(before, after, list) {
+
+}
+
+
+//6 - Bucket Sort
+
+/* O(n) algorithm to sort array of integers.  We know highest and lowest values.  no .splice(), shift(), or unshift(). */
+
+//7 - Sort in place
+
+/* Write a function that will shuffle an array into a random order in place (without creating a new array) */
+
+
+
+//8 - Sorting books
+
+/* Given 20 books. Sort them into alphabetical order. */
+
+let books = [''];
+
+function sortBooks(array, start=0, end=array.length) {
+
+}
+
+function partitionBooks(array, start, end) {
+
+}
+
+function swapBooks(array, i, j) {
+
+}
 
