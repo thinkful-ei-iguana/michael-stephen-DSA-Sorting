@@ -11,8 +11,9 @@ const LL = require('./Linked-List/linked-lists');
 
   d) [1, 21, 26, 45], [2, 9, 28, 29]
 
+*/
 
-  2 - Understanding quicksort
+/* 2 - Understanding quicksort
 
   after first partition: 
   [3, 9, 1, 14, 17, 24, 22, 20]
