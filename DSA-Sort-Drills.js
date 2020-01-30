@@ -46,6 +46,14 @@ console.log('Quick: ', sort.quickSort(testData));
 console.log('Merge: ', sort.mergeSort(testData));
 
 //5 - Sorting a linked list using merge sort
+function findListLength(list) {
+  let count = 0;
+  while (list.next) {
+    ++count;
+    findListLength(list.next);
+  }
+  return ++count;
+}
 function makeList() {
   let testList = new LL();
   testList.insertLast(1);
@@ -56,6 +64,22 @@ function makeList() {
 console.log(makeList());
 
 function mergeSortLL(list) {
+  const end = findListLength(list);
+  const mid = Math.floor(end / 2);
+  let node = list;
+  
+  let left = new LL();
+  let right = new LL();
+
+  for (let i = 0; i <= mid; i++) {
+    left.insertlast(node);
+    node = node.next;
+  }
+  right = node.next;
+
+  mergeSortLL(left);
+  mergeSortLL(right);
+  console.log(left);
 
 }
 
