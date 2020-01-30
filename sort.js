@@ -42,7 +42,7 @@ function merge(left, right, array) {
   let rightIndex = 0;
   let outputIndex = 0;
   while(leftIndex < left.length && rightIndex < right.length) {
-    if(left[leftIndex++] < right[rightIndex++]) {
+    if(left[leftIndex] < right[rightIndex]) {
       array[outputIndex++] = left[leftIndex++];
     }
     else {
