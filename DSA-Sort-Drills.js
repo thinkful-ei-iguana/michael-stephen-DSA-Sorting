@@ -34,16 +34,16 @@ const LL = require('./Linked-List/linked-lists');
 */
 
 //3 - Implementing quicksort
-const testData = [89, 30, 25, 32, 72, 70, 51, 42, 25, 24, 53, 55, 78, 50, 13, 40, 48, 32, 26, 2, 14, 33, 45, 72, 56, 44, 21, 88, 27, 68, 15, 62, 93, 98, 73, 28, 16, 46, 87, 28, 65, 38, 67, 16, 85, 63, 23, 69, 64, 91, 9, 70, 81, 27, 97, 82, 6, 88, 3, 7, 46, 13, 11, 64, 76, 31, 26, 38, 28, 13, 17, 69, 90, 1, 6, 7, 64, 43, 9, 73, 80, 98, 46, 27, 22, 8, 7, 49, 83, 6, 39, 42, 51, 54, 84, 34, 53, 78, 40, 14, 5];
+// const testData = [89, 30, 25, 32, 72, 70, 51, 42, 25, 24, 53, 55, 78, 50, 13, 40, 48, 32, 26, 2, 14, 33, 45, 72, 56, 44, 21, 88, 27, 68, 15, 62, 93, 98, 73, 28, 16, 46, 87, 28, 65, 38, 67, 16, 85, 63, 23, 69, 64, 91, 9, 70, 81, 27, 97, 82, 6, 88, 3, 7, 46, 13, 11, 64, 76, 31, 26, 38, 28, 13, 17, 69, 90, 1, 6, 7, 64, 43, 9, 73, 80, 98, 46, 27, 22, 8, 7, 49, 83, 6, 39, 42, 51, 54, 84, 34, 53, 78, 40, 14, 5];
 
 
-console.log('Quick: ', sort.quickSort(testData));
+// console.log('Quick: ', sort.quickSort(testData));
 
 //4 - Implementing merge sort 
 
 //SEE sort.js mergeSort function.
 
-console.log('Merge: ', sort.mergeSort(testData));
+// console.log('Merge: ', sort.mergeSort(testData));
 
 //5 - Sorting a linked list using merge sort
 function size(list) {
@@ -127,14 +127,36 @@ console.log(mergeSortLL(makeList()));
 
 /* O(n) algorithm to sort array of integers.  We know highest and lowest values.  no .splice(), shift(), or unshift(). */
 
-function sortNums(array, highest, lowest) {
+function bucketSort(array) {
+  const n = array.length / array[0];
+  let buckets = [];
 
+  for (let i = 0; i < n; i++) {
+    buckets.push([]);
+  }
+
+  for (let i = 0; i < n; i++) {
+    let bIn = n * array[i];
+    buckets[bIn].push(array[i]);
+  }
+
+  for (let i = 0; i < n; i++) {
+    sort.quickSort(buckets[i]);
+  }
+
+  let index = 0;
+
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < buckets[i].length; j++) {
+      array[index++] = buckets[i][j];
+    }
+  }
+  return array;
 }
-function swap(arr, i, j) {
-  let tmp = arr[i];
-  arr[i] = arr[j];
-  arr[j] = tmp;
-}
+
+const array = [0.9, 0.8, 0.5, 0.3, 0.2, 0.7, 0.1, 0.4, 0.6];
+
+console.log(bucketSort(array));
 
 //7 - Sort in place
 
