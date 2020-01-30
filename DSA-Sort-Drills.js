@@ -46,51 +46,95 @@ console.log('Quick: ', sort.quickSort(testData));
 console.log('Merge: ', sort.mergeSort(testData));
 
 //5 - Sorting a linked list using merge sort
-function findListLength(list) {
-  let count = 0;
-  while (list.next) {
-    ++count;
-    findListLength(list.next);
+function size(list) {
+  if (!list) return ;
+  let currNode = list.head;
+  let counter = 0;
+  while (currNode !== null) {
+    if(currNode !== null){
+      currNode = currNode.next;
+      counter++;
+    }
   }
-  return ++count;
+  return counter;
 }
+
 function makeList() {
   let testList = new LL();
   testList.insertLast(1);
+  testList.insertLast(35);
+  testList.insertLast(55);
+  testList.insertLast(13);
+  testList.insertLast(17);
+  testList.insertLast(19);
+  testList.insertLast(29);
+
 
   return testList;
 }
 
-console.log(makeList());
+function display(list) {
+  let currNode = list.head;
+  while(currNode.next !== null) {
+    console.log('Node Contains: ', currNode.value);
+    currNode = currNode.next;
+  }
+  console.log('Node Contains: ', currNode.value);
+  console.log('End of list.');
+}
+
+// display(makeList());
 
 function mergeSortLL(list) {
-  const end = findListLength(list);
-  const mid = Math.floor(end / 2);
-  let node = list;
+  if(size(list) <= 1) {
+    return list;
+  }
   
+  let end = size(list);
+  const mid = Math.round(end / 2);
+  
+  let midNode = list.findAt(mid); 
+  
+
   let left = new LL();
   let right = new LL();
+  right.head = midNode.next;
+  midNode.next = null;
+  left = list;
 
-  for (let i = 0; i <= mid; i++) {
-    left.insertlast(node);
-    node = node.next;
+  right = mergeSortLL(right);
+  left = mergeSortLL(left);
+  return mergeLL(left, right, list);
+}
+
+
+function mergeLL(left, right, list) {
+  // compare value of left to value of right put lowest value into list.LL
+  while(left.head !== null && right.head !== null) {
+    if(left.head.value < right.head.value) {
+      list.next = left.next;
+    } else {
+      // let something = right.remove(right.head.value);
+      list.next = right.next;
+    }
   }
-  right = node.next;
-
-  mergeSortLL(left);
-  mergeSortLL(right);
-  console.log(left);
-
+  return list;
 }
 
-function mergeLL(before, after, list) {
-
-}
-
+console.log(mergeSortLL(makeList()));
 
 //6 - Bucket Sort
 
 /* O(n) algorithm to sort array of integers.  We know highest and lowest values.  no .splice(), shift(), or unshift(). */
+
+function sortNums(array, highest, lowest) {
+
+}
+function swap(arr, i, j) {
+  let tmp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = tmp;
+}
 
 //7 - Sort in place
 

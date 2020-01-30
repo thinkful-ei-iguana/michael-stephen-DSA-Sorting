@@ -70,6 +70,14 @@ class LinkedList {
     console.log(`Adding ${item} after ${tempNode.value} before ${after.value}.`);
     tempNode.next = new _Node(item, after);
   }
+
+  findAt(position) {
+    let tempNode = this.head;
+    for (let i = 1; i < position; i++){
+      tempNode = tempNode.next;
+    }
+    return tempNode;
+  }
   
   find(item) {
     let currNode = this.head;
@@ -106,7 +114,7 @@ class LinkedList {
 
     while ((currNode !== null) && (currNode.value !== item)) {
       //save the previous node
-      console.log(currNode);
+      // console.log(currNode);
       previousNode = currNode;
       currNode = currNode.next;
     }
